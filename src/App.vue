@@ -76,7 +76,7 @@ header {
   display: flex;
 
   @include onTablet {
-    padding: var(--unit-3) var(--unit-4);
+    padding: var(--unit-4);
   }
 
   .top-bar {
