@@ -4,6 +4,10 @@
       <TagsInput />
       <Refresh />
     </div>
+
+    <div class="side-bar">
+      <ThemeToggleButton />
+    </div>
   </header>
   <main>
     <img :src="image" alt="Unsplash random" v-if="image" />
@@ -11,6 +15,7 @@
   </main>
   <nav>
     <Refresh />
+    <ThemeToggleButton />
   </nav>
 </template>
 
@@ -20,11 +25,15 @@ import { onMounted } from 'vue';
 import TagsInput from './components/TagsInput.vue';
 import Refresh from './components/Refresh.vue';
 import LoadingAnimation from './components/LoaderThreeDots.vue';
+import ThemeToggleButton from './components/ThemeToggleButton.vue';
 import store from './store';
+import { addInitialTheme } from './utils';
 
 const { getters, actions } = store;
 const { getImage: image, getIsImageFetching: isImageFetching } = getters;
 const { fetchImage } = actions;
+
+addInitialTheme();
 
 onMounted(() => {
   fetchImage({ firstLoad: true });
@@ -41,7 +50,7 @@ body {
   font-family: 'Rubik', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: var(--color-bg-grey-10);
+  background-color: var(--color-grey-10);
   font-size: 16px;
 }
 
@@ -62,14 +71,16 @@ header {
   position: relative;
   z-index: 100;
   padding: var(--unit-3);
+  display: flex;
 
   @include onTablet {
     padding: var(--unit-3) var(--unit-4);
   }
 
   .top-bar {
+    width: 100%;
     @include onDesktop {
-      max-width: 500px;
+      width: 500px;
       margin: 0 auto;
       display: flex;
     }
@@ -85,6 +96,15 @@ header {
 
     .tags-input {
       flex: 1;
+    }
+  }
+
+  .side-bar {
+    .theme-toggle-button {
+      display: none;
+      @include onDesktop {
+        display: flex;
+      }
     }
   }
 }
@@ -119,6 +139,8 @@ nav {
   bottom: 0;
   padding-right: var(--unit-3);
   padding-bottom: var(--unit-5);
+  display: flex;
+  flex-direction: column;
 
   @include onTablet {
     padding-right: var(--unit-4);
@@ -126,6 +148,10 @@ nav {
 
   @include onDesktop {
     display: none;
+  }
+
+  button:not(:last-child) {
+    margin-bottom: var(--unit-2);
   }
 }
 </style>

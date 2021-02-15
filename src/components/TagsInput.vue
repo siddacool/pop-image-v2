@@ -4,7 +4,7 @@
       type="text"
       :value="tags"
       :disabled="isImageFetching"
-      placeholder="Search tags e.g. sky,night"
+      placeholder="Search tags e.g. sky, night"
       @change="handleTagsInputChange"
       @keyup.enter="handleOnEnter"
     />

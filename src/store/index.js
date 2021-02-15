@@ -1,12 +1,15 @@
 import { reactive, readonly, computed } from 'vue';
 import { textToArray } from '../utils';
+import { getStorage, updateStorage } from '../storage';
 
 const unsplashBaseUrlMain = 'https://source.unsplash.com/random';
+
+const { tags } = getStorage();
 
 const state = reactive({
   image: null,
   isImageFetching: false,
-  tags: [],
+  tags,
 });
 
 const fetchImage = async (config = {}) => {
@@ -50,7 +53,9 @@ const fetchImage = async (config = {}) => {
 };
 
 const updateTags = (tags) => {
-  state.tags = textToArray(tags);
+  const tagsArray = textToArray(tags);
+  state.tags = tagsArray;
+  updateStorage({ tags: tagsArray });
 };
 
 const getTagsInTextFormat = computed(() => state.tags.join(', '));
