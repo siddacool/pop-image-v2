@@ -11,7 +11,9 @@
   </header>
   <main>
     <img :src="image" alt="Unsplash random" v-if="image" />
-    <div class="loading-placeholder" v-else><LoadingAnimation /></div>
+    <div class="loading-placeholder" v-if="isImageFetching">
+      <LoadingAnimation />
+    </div>
   </main>
   <nav>
     <Refresh />
