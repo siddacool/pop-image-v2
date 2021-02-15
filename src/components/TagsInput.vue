@@ -6,7 +6,7 @@
       :disabled="isImageFetching"
       placeholder="Search tags e.g. sky,night"
       @change="handleTagsInputChange"
-      @keyup.enter="fetchImage"
+      @keyup.enter="handleOnEnter"
     />
   </div>
 </template>
@@ -23,6 +23,10 @@ const {
 
 const handleTagsInputChange = (e) => {
   updateTags(e.target.value);
+};
+
+const handleOnEnter = (e) => {
+  fetchImage();
 };
 </script>
 
