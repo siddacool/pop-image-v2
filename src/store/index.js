@@ -28,6 +28,7 @@ const fetchImage = async (config = {}) => {
 
     if (!url) {
       console.log('No image found');
+      state.isImageFetching = false;
       return;
     }
 
@@ -35,14 +36,15 @@ const fetchImage = async (config = {}) => {
 
     if (firstLoad) {
       state.image = url;
+      state.isImageFetching = false;
     } else {
       setTimeout(() => {
         state.image = url;
+        state.isImageFetching = false;
       }, 2000);
     }
   } catch (err) {
     console.dir(err);
-  } finally {
     state.isImageFetching = false;
   }
 };

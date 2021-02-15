@@ -9,7 +9,9 @@
     <img :src="image" alt="Unsplash random" v-if="image" />
     <div class="loading-placeholder" v-else><LoadingAnimation /></div>
   </main>
-  <nav></nav>
+  <nav>
+    <Refresh />
+  </nav>
 </template>
 
 <script setup>
@@ -107,6 +109,23 @@ main {
     width: inherit;
     align-items: center;
     justify-content: center;
+  }
+}
+
+nav {
+  position: fixed;
+  z-index: 100;
+  right: 0;
+  bottom: 0;
+  padding-right: var(--unit-3);
+  padding-bottom: var(--unit-5);
+
+  @include onTablet {
+    padding-right: var(--unit-4);
+  }
+
+  @include onDesktop {
+    display: none;
   }
 }
 </style>
