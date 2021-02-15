@@ -129,6 +129,10 @@ main {
     width: inherit;
     align-items: center;
     justify-content: center;
+
+    svg {
+      fill: var(--color-grey-100);
+    }
   }
 }
 
